@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panneaux de signalisation routière — Leçon et quiz</title>
+<style>
+:root{
+  --bg:#f4f7fa;--card:#fff;--ink:#16212b;--mute:#5b6b7a;--line:#d6dee6;
+  --blue:#005387;--blue-soft:#e3eef6;--red:#cc0605;--ok:#1b7f3b;--ok-bg:#e3f5e9;--ko-bg:#fde7e7;--tile:#fff;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0f1720;--card:#17212c;--ink:#e8eef4;--mute:#9db0c1;--line:#2b3a49;--blue:#6db4e6;--blue-soft:#1a2e3f;--red:#ff6b64;--ok:#5fd48a;--ok-bg:#12301f;--ko-bg:#3a1717}
+}
+:root[data-theme="dark"]{--bg:#0f1720;--card:#17212c;--ink:#e8eef4;--mute:#9db0c1;--line:#2b3a49;--blue:#6db4e6;--blue-soft:#1a2e3f;--red:#ff6b64;--ok:#5fd48a;--ok-bg:#12301f;--ko-bg:#3a1717}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:120px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+header.top{background:var(--blue);color:#fff;padding:18px 16px 0}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) header.top{background:#12354f;color:#fff}}
+:root[data-theme="dark"] header.top{background:#12354f}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+header.top .wrap{padding:0}
+h1{margin:0 0 4px;font-size:1.5rem;line-height:1.25}
+.sub{margin:0 0 14px;opacity:.85;font-size:.95rem}
+.tabs{display:flex;gap:4px}
+.tabs button{border:0;background:transparent;color:#fff;opacity:.75;font:inherit;font-weight:600;padding:10px 18px;border-radius:10px 10px 0 0;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--bg);color:var(--blue);opacity:1}
+main{padding:18px 0 60px}
+.hide{display:none!important}
+/* lesson */
+.tools{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0;border-bottom:1px solid var(--line);margin-bottom:14px}
+.tools .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.tools input[type=search]{flex:1 1 220px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:inherit}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:5px 12px;font-size:.85rem;text-decoration:none;white-space:nowrap}
+.chip:hover{border-color:var(--blue)}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:8px 0 2px;-webkit-overflow-scrolling:touch}
+.tog{display:flex;gap:6px;align-items:center;font-size:.9rem;color:var(--mute);cursor:pointer;user-select:none}
+.memo{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:18px}
+.memo h2{margin:0 0 8px;font-size:1.05rem}
+.shapes{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.shape{display:flex;gap:10px;align-items:center;font-size:.88rem;line-height:1.3}
+.shape svg{flex:none;width:44px;height:44px}
+section.chap{margin-bottom:28px}
+.chap h2{margin:0;font-size:1.25rem;color:var(--blue)}
+.chap h2 small{display:block;font-size:.85rem;font-weight:500;color:var(--mute)}
+.chap p.d{margin:6px 0 12px;color:var(--mute);font-size:.95rem}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media (max-width:720px){.grid{grid-template-columns:1fr}}
+.card{display:flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px;break-inside:avoid}
+.tile{flex:none;width:92px;height:92px;background:var(--tile);border-radius:8px;display:grid;place-items:center;border:1px solid #e6ebf0}
+.tile img{width:84px;height:84px;object-fit:contain;display:block}
+.card .mg{font-weight:600;font-size:.95rem}
+.card .fr{color:var(--mute);font-style:italic;font-size:.88rem;margin-top:2px}
+.review .card .txt{filter:blur(7px);cursor:pointer;transition:filter .15s}
+.review .card.open .txt{filter:none}
+.lights{grid-column:1/-1;align-items:flex-start}
+.lights ul{margin:4px 0 0;padding-left:18px;font-size:.92rem}
+.lights .imgs{display:flex;flex-direction:column;gap:8px}
+.empty{color:var(--mute);padding:20px;text-align:center}
+.cta{display:inline-block;margin-top:6px;background:var(--blue);color:#fff;border:0;border-radius:10px;padding:10px 18px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .cta{color:#08202f}}
+:root[data-theme="dark"] .cta{color:#08202f}
+.cta.alt{background:transparent;color:var(--blue);border:1px solid var(--blue)}
+/* quiz hub */
+.hub{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:12px}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:6px}
+.qcard h3{margin:0;font-size:1.05rem}
+.qcard p{margin:0;color:var(--mute);font-size:.92rem;flex:1}
+.qcard .best{font-size:.85rem;color:var(--ok)}
+.qcard .cta{align-self:flex-start}
+.filter{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:10px 0}
+.filter select{padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit}
+/* quiz run */
+.run{max-width:760px;margin:0 auto}
+.bar{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin:6px 0 14px}
+.bar i{display:block;height:100%;background:var(--blue);width:0;transition:width .25s}
+.meta{display:flex;justify-content:space-between;font-size:.9rem;color:var(--mute)}
+.q{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.qtype{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--blue);background:var(--blue-soft);padding:2px 10px;border-radius:99px;margin-bottom:8px}
+.q h2{font-size:1.1rem;margin:0 0 10px}
+.qimg{display:flex;justify-content:center;margin:6px 0 12px}
+.qimg .tile{width:150px;height:150px}.qimg .tile img{width:138px;height:138px}
+.opts{display:grid;gap:8px}
+.opt{display:block;width:100%;text-align:left;background:var(--card);color:var(--ink);border:2px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--blue)}
+.opt .s{display:block;color:var(--mute);font-style:italic;font-size:.85rem}
+.opt.ok{border-color:var(--ok);background:var(--ok-bg)}
+.opt.ko{border-color:var(--red);background:var(--ko-bg)}
+.opt:disabled{cursor:default}
+.opts.imgs{grid-template-columns:1fr 1fr}
+.opts.imgs .opt{display:grid;place-items:center;padding:8px}
+.opts.imgs .tile{width:110px;height:110px;border:0}.opts.imgs .tile img{width:104px;height:104px}
+.tf{grid-template-columns:1fr 1fr}
+.tf .opt{text-align:center;font-weight:700}
+.stmt{background:var(--blue-soft);border-radius:10px;padding:10px 12px;margin-bottom:12px}
+.stmt .s{color:var(--mute);font-style:italic;font-size:.88rem}
+.fb{min-height:1.5em;margin-top:12px;font-weight:600}
+.fb.ok{color:var(--ok)}.fb.ko{color:var(--red)}
+.fb small{display:block;color:var(--mute);font-weight:400}
+.nav{display:flex;justify-content:space-between;margin-top:14px;gap:10px}
+.result{text-align:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px 16px}
+.score{font-size:3rem;font-weight:800;color:var(--blue);line-height:1}
+.result .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.review-list{text-align:left;margin-top:18px}
+.review-list .card{margin-bottom:8px}
+.review-list .card.bad{border-color:var(--red)}
+/* matching */
+.match{position:relative;display:grid;grid-template-columns:96px 1fr 1fr;gap:0;margin:8px 0}
+.match .colL,.match .colR{display:flex;flex-direction:column;gap:10px}
+.match svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.mi{border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;font:inherit;cursor:pointer;text-align:left}
+.mi.L{display:grid;place-items:center;padding:3px;height:90px}
+.mi.L .tile{width:80px;height:80px;border:0}.mi.L .tile img{width:76px;height:76px}
+.mi.R{padding:8px 10px;min-height:90px;font-size:.88rem;display:flex;flex-direction:column;justify-content:center}
+.mi.R .s{color:var(--mute);font-style:italic;font-size:.8rem}
+.mi.sel{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-soft)}
+.mi.linked{border-color:var(--blue)}
+.mi.ok{border-color:var(--ok);background:var(--ok-bg)}.mi.ko{border-color:var(--red);background:var(--ko-bg)}
+.mi:disabled{cursor:default}
+.hint{font-size:.88rem;color:var(--mute);margin:0 0 6px}
+footer{color:var(--mute);font-size:.85rem;text-align:center;padding:20px 16px}
+@media print{
+  header.top,.tools,.tabs,#quiz,footer,.cta{display:none!important}
+  body{background:#fff;color:#000}
+  #lecon{display:block!important}
+  .card{border-color:#999}.grid{grid-template-columns:1fr 1fr}
+  .review .card .txt{filter:none}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <h1>Panneaux de signalisation routière</h1>
+    <p class="sub">Takelaby fanasokajana — leçon illustrée puis quiz d’entraînement</p>
+    <div class="tabs" role="tablist">
+      <button role="tab" id="t-lecon" aria-selected="true" aria-controls="lecon">Leçon</button>
+      <button role="tab" id="t-quiz" aria-selected="false" aria-controls="quiz">Quiz</button>
+    </div>
+  </div>
+</header>
+<main class="wrap">
+
+<div id="lecon" role="tabpanel" aria-labelledby="t-lecon">
+  <div class="tools">
+    <div class="row">
+      <input type="search" id="q" placeholder="Rechercher un panneau (français ou malagasy)…" aria-label="Rechercher">
+      <label class="tog"><input type="checkbox" id="rev"> Mode révision (masquer les définitions)</label>
+    </div>
+    <div class="chips" id="chips"></div>
+  </div>
+
+  <div class="memo">
+    <h2>À retenir : la forme et la couleur</h2>
+    <div class="shapes">
+      <div class="shape"><svg viewBox="0 0 44 44" aria-hidden="true"><polygon points="22,5 41,38 3,38" fill="#fff" stroke="#cc0605" stroke-width="5" stroke-linejoin="round"/></svg><span><b>Triangle rouge</b><br>danger</span></div>
+      <div class="shape"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="17" fill="#fff" stroke="#cc0605" stroke-width="5"/></svg><span><b>Rond bordé de rouge</b><br>interdiction</span></div>
+      <div class="shape"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="19" fill="#005387"/></svg><span><b>Rond bleu</b><br>obligation</span></div>
+      <div class="shape"><svg viewBox="0 0 44 44" aria-hidden="true"><rect x="4" y="4" width="36" height="36" rx="4" fill="#005387"/></svg><span><b>Carré bleu</b><br>indication</span></div>
+      <div class="shape"><svg viewBox="0 0 44 44" aria-hidden="true"><polygon points="14,4 30,4 41,15 41,29 30,40 14,40 3,29 3,15" fill="#cc0605"/></svg><span><b>Octogone rouge</b><br>STOP</span></div>
+      <div class="shape"><svg viewBox="0 0 44 44" aria-hidden="true"><polygon points="3,6 41,6 22,40" fill="#fff" stroke="#cc0605" stroke-width="5" stroke-linejoin="round"/></svg><span><b>Triangle pointe en bas</b><br>cédez le passage</span></div>
+    </div>
+  </div>
+
+  <div id="chapters"></div>
+  <p class="empty hide" id="none">Aucun panneau ne correspond à votre recherche.</p>
+  <p style="text-align:center"><button class="cta" id="go-quiz">Passer au quiz →</button></p>
+</div>
+
+<div id="quiz" class="hide" role="tabpanel" aria-labelledby="t-quiz">
+  <div id="hub">
+    <h2 style="margin:0">Testez vos connaissances</h2>
+    <p style="color:var(--mute);margin:4px 0 0">Cinq types d’exercices et un examen final. Les questions changent à chaque essai.</p>
+    <div class="filter"><label for="chsel">Chapitre :</label><select id="chsel"></select></div>
+    <div class="hub" id="cards"></div>
+  </div>
+  <div id="run" class="run hide"></div>
+</div>
+
+</main>
+<footer>Leçon générée à partir du document « panneaux_signalisation_v2 ». Couleurs de référence : rouge RAL 3020, bleu RAL 5017.</footer>
+
+<script>
+const DATA=[{"id": "c1", "mg": "Takelaby milaza zavatra mampidi-doza", "fr": "Signaux de danger", "items": [{"id": 1, "img": "images/001-virage-a-droite-dangereux.png", "mg": "Fiolahana miankavanana mampidi-doza", "sub": "virage à droite dangereux"}, {"id": 2, "img": "images/002-virage-a-gauche-dangereux.png", "mg": "Fiolahana mianakavia mampidi-doza", "sub": "virage à gauche dangereux"}, {"id": 3, "img": "images/003-succession-de-virages-dont-le-premier-est-a-droite.png", "mg": "Fiolahana roa mifanesy samy mampidi-doza, voalohany miankavanana", "sub": "succession de virages dont le premier est  à droite"}, {"id": 4, "img": "images/004-succession-de-virages-dont-le-premier-est-a-gauche.png", "mg": "Fiolahana maromaro samy mampidi-doza, voalohany miankavia", "sub": "succession de virages dont le premier est  à gauche"}, {"id": 5, "img": "images/005-cassis-ou-dos-dane.png", "mg": "Lalana mikitoatoana", "sub": "cassis ou dos d’âne"}, {"id": 6, "img": "images/006-ralentisseur-de-type-dos-dane.png", "mg": "Fampandehanana mora ny fiara", "sub": "ralentisseur de type dos d’âne"}, {"id": 7, "img": "images/007-chaussee-retrecie.png", "mg": "Lalan-dehibe mihatery", "sub": "chaussée rétrecie"}, {"id": 8, "img": "images/008-chaussee-retrecie-a-droite.png", "mg": "Lalana mihatery ny sisiny havanana", "sub": "chaussée rétrécie à droite"}, {"id": 9, "img": "images/009-chaussee-retrecie-a-gauche.png", "mg": "Lalana mihatery ny sisiny havia", "sub": "chaussée rétrécie à gauche"}, {"id": 10, "img": "images/010-chaussee-particulierement-glissante.png", "mg": "Lalana malama mandavan-taona", "sub": "chaussée particulièrement glissante"}, {"id": 11, "img": "images/011-chaussee-temporairement-glissante.png", "mg": "Lalana malama nohon’ny fotaka", "sub": "Chaussée temporairement glissante"}, {"id": 12, "img": "images/012-travaux.png", "mg": "Misy manamboatra lalana", "sub": "travaux"}, {"id": 13, "img": "images/013-pont-mobile.png", "mg": "Tetezana afa-mihetsika na baka", "sub": "pont mobile"}, {"id": 14, "img": "images/014-passage-a-niveau-garde-avec-barriere.png", "mg": "Lalamby misy mpiambina", "sub": "passage à niveau gardé avec barrière"}, {"id": 15, "img": "images/015-passage-a-niveau-non-garde-sans-barriere.png", "mg": "Lalamby tsy misy mpiambina", "sub": "Passage à niveau non gardé, sans barrière"}, {"id": 16, "img": "images/016-passage-a-niveau-muni-de-demi-barriere-a-fonctionnement.png", "mg": "Lalamby misy mpiambina, misy «signal automatique»", "sub": "passage à niveau muni de demi-barrière à fonctionnement automatique"}, {"id": 17, "img": "images/017-passage-pour-pieton.png", "mg": "Lalana fiampitan’ny mpandeha an-tongotra", "sub": "passage pour piéton"}, {"id": 18, "img": "images/018-dangers-particuliers.png", "mg": "Filazana loza samihafa", "sub": "dangers particuliers"}, {"id": 19, "img": "images/019-passage-dannimaux-domestique.png", "mg": "Toerana be biby fiompy manapaka", "sub": "passage d’annimaux domestique"}, {"id": 20, "img": "images/020-passage-dannimaux-sauvage.png", "mg": "Toerana be biby dia manapaka", "sub": "passage d’annimaux sauvage"}, {"id": 21, "img": "images/021-descente-dangereuse.png", "mg": "Fidinana mihoatra ny 10%", "sub": "descente dangereuse"}, {"id": 22, "img": "images/022-signaux-lumineux-reglant-la-circulation.png", "mg": "Jiro telo soratra mandamina ny fifamoivoizana", "sub": "signaux lumineux réglant la circulation"}, {"id": 23, "img": "images/023-circulation-dans-les-deux-sens.png", "mg": "Lalana tery azo ifanenana", "sub": "circulation dans les deux sens"}, {"id": 24, "img": "images/024-risque-de-chutte-de-pierres.png", "mg": "Mety hisy vato hianjera", "sub": "risque de chutte de pierres"}, {"id": 25, "img": "images/025-debouche-sur-une-berge-ou-un-quai.png", "mg": "Lalana miafara amin’ny morondrano", "sub": "debouche sur une berge ou un quai"}, {"id": 26, "img": "images/026-endroit-frequente-par-les-enfants.png", "mg": "Tanana be ankizy matetika", "sub": "endroit fréquenté par les enfants"}, {"id": 27, "img": "images/027-debouche-de-cycliste-ou-cyclomotoristes.png", "mg": "Afaka 150metatra dia ahita lalana voatokana ho an’ny bisikileta", "sub": "débouché de cycliste ou cyclomotoristes"}, {"id": 28, "img": "images/028-projection-de-gravillons.png", "mg": "Toerana misy vatokely mifafy", "sub": "projection de gravillons"}, {"id": 29, "img": "images/029-vent-lateral.png", "mg": "Toerana misy fijerena ny fitsokan’ny rivotra", "sub": "vent lateral"}, {"id": 30, "img": "images/030-virage-a-droite-particulierement-dangereux.png", "mg": "Fiolahana miankavanana mampidi-doza", "sub": "virage à droite particulièrement dangereux"}, {"id": 31, "img": "images/031-proximite-dun-aerodrome.png", "mg": "Hahita lalana manapaka seranam-piaramanidina afaka 200metatra", "sub": "proximité d’un aérodrôme"}, {"id": 32, "img": "images/032-bouchon-ou-embouteillage-de-voitures.png", "mg": "Fiara marobe milahatra.", "sub": "bouchon ou embouteillage de voitures"}, {"id": 33, "img": "images/033-accident.png", "mg": "Lozam-pifamoivoizana", "sub": "accident"}], "desc": "Triangle pointe en haut, bordure rouge : il prévient d'un danger devant vous."}, {"id": "c2", "mg": "Takelaby milaza sampanan-dalana", "fr": "Signaux d'intersection", "items": [{"id": 34, "img": "images/034-place-sur-une-route-secondaire-annonce-une-autre-route.png", "mg": "Lalan-kely tsotra roa mifanapaka, izay malalaka @ ankavanana no mandeha", "sub": "placé sur une route secondaire. Annonce une autre route secondaire"}, {"id": 35, "img": "images/035-supersignalisation-place-sur-une-route-secondaire-annon.png", "mg": "Lalan-kely roa mifanapaka tena mampidi-doza ka izay malalaka @ ankavanana no mandeha", "sub": "supersignalisation, placé sur une route secondaire. Annonce une autre route secondaire intersection particulièrement dangereuse"}, {"id": 36, "img": "images/036-carrefour-a-sens-giratoire.png", "mg": "Mahita sampanan-dalana misy « rond-point »", "sub": "Carrefour à sens giratoire"}, {"id": 37, "img": "images/037-passage-protege.png", "mg": "Lalan-kely roa mifanapaka be fifamiovoizana, arovan’ny takelaby STOP ka izay avy amin’ny lalana voaaro no mandeha aloha", "sub": "passage protégé"}, {"id": 38, "img": "images/038-place-sur-une-route-a-grande-circulation-annonce-une-ro.png", "mg": "Lalan-dehibe mifanapaka @ lalan-kely. Ny avy @ lalan-dehibe no mandeha aloha", "sub": "placé sur une route à grande circulation. Annonce une route secondaire"}, {"id": 39, "img": "images/039-place-sur-une-route-a-grande-circulation-annonce-une-ro.png", "mg": "Lalan-dehibe roa mifanapaka mampidi-doza ka izay malalaka avy @ havanana no mandeha aloha.", "sub": "placé sur une route à grande circulation. Annonce une route à grande circulation"}, {"id": 40, "img": "images/040-arret-obligatoire-a-lintersection.png", "mg": "Afaka 150 metatra dia tsy maintsy mijanona, mahita stop", "sub": "arrêt obligatoire à l’intersection"}, {"id": 41, "img": "images/041-cedez-le-passage.png", "mg": "Tsy maintsy mandefitra manome lalana ny hafa", "sub": "cédez le passage"}, {"id": 42, "img": "images/042-cedez-le-passage-a-lintersection.png", "mg": "Afaka 150metatra dia tsy maintsy mandefitra", "sub": "cédez le passage à l’intersection"}, {"id": 43, "img": "images/043-arret-obligatoire.png", "mg": "Tsy maintsy mijanona", "sub": "arrêt obligatoire"}, {"id": 44, "img": "images/044-commencement-dune-route-a-priorite.png", "mg": "Fiandohan’ny lalana manam-pahefana", "sub": "commencement d’une route à priorité"}, {"id": 45, "img": "images/045-fin-dune-route-a-priorite.png", "mg": "Fiafaran’ny lalana manam-pahefana", "sub": "fin d’une route à priorité"}], "desc": "Ils règlent la priorité aux carrefours : STOP (octogone), cédez le passage (triangle pointe en bas), route à priorité (losange jaune)."}, {"id": "c3", "mg": "Takelaby milaza zavatra tsy azo atao", "fr": "Signaux d'interdiction", "items": [{"id": 46, "img": "images/046-sens-interdit.png", "mg": "Lalana tsy azo adrosoana fa azo iverenana", "sub": "sens interdit"}, {"id": 47, "img": "images/047-circulation-interdite-a-tout-vehicule.png", "mg": "Tsy azo ivezivezena", "sub": "circulation interdite à tout véhicule"}, {"id": 48, "img": "images/048-interdiction-de-tourner-a-gauche.png", "mg": "Tsy azo atao ny mivily miankavia", "sub": "interdiction de tourner à gauche"}, {"id": 49, "img": "images/049-interdiction-de-tourner-a-droite.png", "mg": "Tsy azo atao ny mivily miankavanana", "sub": "interdiction de tourner à droite"}, {"id": 50, "img": "images/050-interdiction-de-faire-demi-tour.png", "mg": "Tsy azo atao ny miverin-dalana", "sub": "interdiction de faire demi-tour"}, {"id": 51, "img": "images/051-interdiction-de-depasser-tous-les-vehicules-a-moteur.png", "mg": "Tsy azon’ny fiara rehetra atao ny misongona", "sub": "interdiction de dépasser tous les véhicules à moteur"}, {"id": 52, "img": "images/052-interdiction-de-depasser-pour-tous-les-vehicules-dont-l.png", "mg": "Tsy azo ataon’ny fiara lehibe ny misongona ny fiara kely", "sub": "interdiction de dépasser pour tous les véhicules dont le PTC atteint 3.5 tonnes"}, {"id": 53, "img": "images/053-acces-interdit-aux-vehicules-automobiles-aux-motocyclet.png", "mg": "Tsy azo alehan’ny fiara misy motera", "sub": "accès interdit aux véhicules automobiles, aux motocyclettes et aux vélomoteurs"}, {"id": 54, "img": "images/054-acces-interdit-aux-voitures-a-bras.png", "mg": "Tsy azo alehan’ny sarety tarihin-tanana", "sub": "accès interdit aux voitures à bras"}, {"id": 55, "img": "images/055-acces-interdit-aux-vehicules-a-traction-animal.png", "mg": "Tsy azo alehan’ny sarety tarihim-biby", "sub": "accès interdit aux véhicules à traction animal"}, {"id": 56, "img": "images/056-acces-interdit-aux-transports-de-marchandises.png", "mg": "Tsy azo alehan’ny fiara mpitatitra entana mihoatra ny 5.5 tonnes ny lanjany", "sub": "accès interdit aux transports de marchandises"}, {"id": 57, "img": "images/057-acces-interdit-aux-pietons.png", "mg": "Tsy azo alehan’ny mpandeha an-tongotra", "sub": "accès interdit aux piétons"}, {"id": 58, "img": "images/058-acces-interdit-aux-cyclistes.png", "mg": "Tsy azo alehan’ny bisikileta", "sub": "accès interdit aux cyclistes"}, {"id": 59, "img": "images/059-acces-interdit-aux-vehicules-agricoles-a-moteur.png", "mg": "Tsy azo alehan’ny fiara momban’ny fambolena", "sub": "accès interdit aux vehicules agricoles à moteur"}, {"id": 60, "img": "images/060-acces-interdit-aux-vehicules-de-transport-en-commun-de.png", "mg": "Tsy azo alehan’ny fiara mpitatitra olona", "sub": "accès interdit aux vehicules de transport en commun de personnes"}, {"id": 61, "img": "images/061-arret-obligtoire-au-poste-de-douane.png", "mg": "Tsy maintsy mjanona fa misy fisavana entana", "sub": "arrêt obligtoire au poste de douane"}, {"id": 62, "img": "images/062-arret-obligatoire-au-barrage-de-gendarmerie.png", "mg": "Tsy maintsy mijanona rehefa tohanan’ny zandary", "sub": "arrêt obligatoire au barrage de gendarmerie"}, {"id": 63, "img": "images/063-arret-obligatoire-au-barrage-de-police.png", "mg": "Tsy maintsy mijanona rehefa tohanan’ny polisy", "sub": "arrêt obligatoire au barrage de police"}, {"id": 64, "img": "images/064-stationnement-interdit.png", "mg": "Tsy azo ijanonana fa azo iatoana mandritra ny 2minitra", "sub": "stationnement interdit"}, {"id": 65, "img": "images/065-stationnement-interdit-du-1er-au-15-du-mois.png", "mg": "Tsy azo ijanonana manomboka ny voalohan’ny volana ka hatr’@ faha 15n’ny volana", "sub": "stationnement interdit du 1er au 15 du mois"}, {"id": 66, "img": "images/066-stationnement-interdit-du-16-a-la-fin-du-mois.png", "mg": "Tsy azo ijanonana manomboka ny faha 16n’ny volana ka hatr’@ faran’ny volana", "sub": "stationnement interdit du 16 à la fin du mois"}, {"id": 67, "img": "images/067-stationnement-unilateral-a-lalternance-semi-mensuelle.png", "mg": "Tsy azo ijanonana ny ilan’ny arabe, miova isaky ny tapa-bolana", "sub": "stationnement unilatéral à l’alternance semi-mensuelle"}, {"id": 68, "img": "images/068-arret-strictement-interdit.png", "mg": "Tsy azo ijanonana na dia 1segondra aza", "sub": "arrêt strictement interdit"}, {"id": 69, "img": "images/069-double-limitation-de-vitesse-dont-30km-h-aux-plus-de-3.png", "mg": "Hafainganam-padeha voafetra ho 30km/h hoan’ny fiara lehibe, ary 50km/h fiara kely", "sub": "double limitation de vitesse dont 30km/h aux plus de 3.6tonnes et 50km/h pour les autres"}, {"id": 70, "img": "images/070-interdiction-aux-vehicules-de-circuler-sans-maintenir-u.png", "mg": "Tsy azon’ny fiara roa atao ny mifanarakaraka latsaky ny 50metatra ny elanelany", "sub": "interdiction aux véhicules de circuler sans maintenir un interval au moins de 50mètres"}, {"id": 71, "img": "images/071-klaxon-interdit.png", "mg": "Tsy azo ampanenoana anjomara", "sub": "klaxon interdit"}, {"id": 72, "img": "images/072-barriere-de-pluie.png", "mg": "Lalana voasakana nohon’ny orana", "sub": "barrière de pluie"}, {"id": 73, "img": "images/073-acces-interdit-aux-vehicules-transportant-des-marchandi.png", "mg": "Tsy azo alehan’ny fiara mitondra entana mampidi-doza", "sub": "accès interdit aux véhicules transportant des marchandises dangereuses"}, {"id": 74, "img": "images/074-acces-interdit-aux-vehicules-transportant-des-marchandi.png", "mg": "Tsy azo alehan’ny fiara mitondra entana mora mipoaka na mora mirehitra", "sub": "accès interdit aux véhicules transportant des marchandises explosives ou facilement inflammables"}, {"id": 75, "img": "images/075-acces-interdit-aux-motocyclettes.png", "mg": "Tsy azo alehan’ny moto moto mihoatra ny 125cc", "sub": "Accès interdit aux motocyclettes"}, {"id": 76, "img": "images/076-interdit-aux-troupeaux.png", "mg": "Tsy azo alehan’ny andian’omby", "sub": "interdit aux troupeaux"}, {"id": 77, "img": "images/077-acces-interdit-aux-vehicules-dont-la-largeur-depasse-2m.png", "mg": "Tsy azo alehan’ny fiara mihoatra ny 2m ny sakany", "sub": "accès interdit aux vehicules dont la largeur dépasse 2m"}, {"id": 78, "img": "images/078-acces-interdit-aux-vehicules-dont-la-hauteur-depasse-3.png", "mg": "Tsy azo alehan’ny fiara mihoatra ny 3m sasany ny haavony", "sub": "Accès interdit aux véhicules dont la hauteur dépasse 3.5m"}, {"id": 79, "img": "images/079-acces-interdit-aux-vehicules-dont-la-longueur-deppase-1.png", "mg": "Tsy azo alehan’ny fiara mihoatra ny 10m ny halavany", "sub": "accès interdit aux véhicules dont la longueur déppase 10m"}, {"id": 80, "img": "images/080-acces-interdit-a-tous-vehicules-dont-le-ptac-depasse-5.png", "mg": "Tsy azo alehan’ny fiara rehetra mihoatra ny 5.5tonnes ny lanjany", "sub": "accès interdit à tous véhicules dont le PTAC dépasse 5.5t"}, {"id": 81, "img": "images/081-interdit-aux-vehicules-pesant-sur-un-essieu-plus-que-2.png", "mg": "Tsy azo alehan’ny fiara manana lanja iray mihoatra ny 2taonina sy sasany ny lanjany", "sub": "interdit aux véhicules pesant sur un essieu plus que 2.5t"}, {"id": 82, "img": "images/082-vitesse-limitee-a-50km-h-pour-tous-les-vehicules.png", "mg": "Hafainganam-pandeha voafetra ho 50km/h hoan’ny fiara rehetra", "sub": "vitesse limitée à 50km/h pour tous les véhicules"}, {"id": 83, "img": "images/083-priorite-a-la-circulation-venant-en-sens-inverse.png", "mg": "Mandefitra ny fiara mahita ny takela-by, fahefana hoan’ny fiara hifanena", "sub": "priorité à la circulation venant en sens inverse"}], "desc": "Rond à bordure rouge : ce qui est représenté est interdit."}, {"id": "c4", "mg": "Takelaby milaza zavatra tsy maintsy atao", "fr": "Signaux d'obligation", "items": [{"id": 84, "img": "images/084-obligation-de-tourner-a-droite-avant-le-panneau.png", "mg": "Tsy maintsy mandeha miankavanana manaraka ny « flèche »", "sub": "obligation de tourner à droite avant le panneau"}, {"id": 85, "img": "images/085-obligation-de-tourner-a-gauche-avant-le-panneau.png", "mg": "Tsy maintsy mandeha miankavia manaraka ny « flèche »", "sub": "obligation de tourner à gauche avant le panneau"}, {"id": 86, "img": "images/086-direction-obligatoire-a-la-prochaine-intersection-tout.png", "mg": "Tsy maintsy mandeha mahintsy", "sub": "direction obligatoire, à la prochaine intersection tout droit"}, {"id": 87, "img": "images/087-tsy-maintsy-mihodina-mankany-aminny-ankavanana.png", "mg": "Tsy maintsy mihodina mankany amin’ny ankavanana", "sub": "Miala ny sakana"}, {"id": 88, "img": "images/088-tsy-maintsy-mihodin-mankany-aminny-ankavia.png", "mg": "Tsy maintsy mihodin mankany amin’ny ankavia", "sub": "Miala ny sakana"}, {"id": 89, "img": "images/089-tsy-maintsy-mivily-miankavanana-eo-aminny-fihaonan-dala.png", "mg": "Tsy maintsy mivily miankavanana eo amin’ny fihaonan-dalana", "sub": ""}, {"id": 90, "img": "images/090-tsy-maintsy-mivily-miankavia-eo-aminny-fihaonan-dalana.png", "mg": "Tsy maintsy mivily miankavia eo amin’ny fihaonan-dalana", "sub": ""}, {"id": 91, "img": "images/091-fihodinana-tsy-maintsy-arahina.png", "mg": "Fihodinana tsy maintsy arahina", "sub": ""}, {"id": 92, "img": "images/092-lalana-tsy-maintsy-arahina-eo-fihaonan-dalana-mandeha-m.png", "mg": "Lalana tsy maintsy arahina eo @ fihaonan-dalana. Mandeha mahintsy na mivily miankavanana", "sub": ""}, {"id": 93, "img": "images/093-lalana-tsy-maintsy-arahina-eo-fihaonan-dalana-mandeha-m.png", "mg": "Lalana tsy maintsy arahina eo @ fihaonan-dalana. Mandeha mahintsy na mivily miankavia", "sub": ""}, {"id": 94, "img": "images/094-lalana-tsy-maintsy-arahina-eo-sampanan-dalana-mivily-an.png", "mg": "Lalana tsy maintsy arahina eo @ sampanan-dalana. Mivily ankavanana na ankavia", "sub": ""}, {"id": 95, "img": "images/095-piste-obligatoire-pour-cycles.png", "mg": "Lalana voatokana hoan’ny bisikileta", "sub": "piste obligatoire pour cycles"}, {"id": 96, "img": "images/096-serrez-a-droite.png", "mg": "Tsy maintsy manery sisiny havanana", "sub": "serrez à droite"}, {"id": 97, "img": "images/097-tsy-maintsy-mandeha-mihoatra-ny-30km-h.png", "mg": "Tsy maintsy mandeha mihoatra ny 30km/h", "sub": ""}, {"id": 98, "img": "images/098-tsy-maintsy-mampirehitra-jiro.png", "mg": "Tsy maintsy  mampirehitra jiro", "sub": ""}, {"id": 99, "img": "images/099-lalana-voatokana-hoanny-fiara-fitateranolona.png", "mg": "Lalana voatokana hoan’ny fiara fitateran’olona", "sub": ""}], "desc": "Rond à fond bleu avec un pictogramme blanc : l'action représentée est obligatoire."}, {"id": "c5", "mg": "Takelaby milaza zavatra tsotra", "fr": "Signaux de simple indication", "items": [{"id": 100, "img": "images/100-parking.png", "mg": "Toerana fijanonana", "sub": "parking"}, {"id": 101, "img": "images/101-parking-sur-500m.png", "mg": "Toerana fijanonana ao anaty ny 500m", "sub": "Parking sur 500m"}, {"id": 102, "img": "images/102-hopital.png", "mg": "Hopitaly na toeram-pitsaboana", "sub": "hopital"}, {"id": 103, "img": "images/103-foret-facilement-inflammable.png", "mg": "Ala mora mirehitra", "sub": "forêt facilement inflammable"}, {"id": 104, "img": "images/104-poste-de-secours.png", "mg": "Toerana fitsaboana vonjimaika", "sub": "poste de secours"}, {"id": 105, "img": "images/105-poste-dappel-telephonique.png", "mg": "Toerana fiantsoana an-tariby", "sub": "poste d’appel téléphonique"}, {"id": 106, "img": "images/106-takelaby-entinny-mpandroaka-omby-30-50metatra-aloha-sy.png", "mg": "Takelaby entin’ny mpandroaka omby. 30-50metatra aloha sy aorian’ny andian’omby", "sub": ""}, {"id": 107, "img": "images/107-toerana-fijanonanny-taxi.png", "mg": "Toerana fijanonan’ny TAXI", "sub": ""}, {"id": 108, "img": "images/108-circulation-a-sens-unique.png", "mg": "Lalana mandroso ihany", "sub": "circulation à sens unique"}, {"id": 109, "img": "images/109-chemin-sans-issue.png", "mg": "Lalana tsy misy fivoahana", "sub": "chemin sans issue"}, {"id": 110, "img": "images/110-terrain-pour-tente.png", "mg": "Toerana azo anorenana trano lay", "sub": "terrain pour tente"}, {"id": 111, "img": "images/111-emplacement-darret-durgence.png", "mg": "Toerana natokana hoan’ny fijanonana maika", "sub": "emplacement d’arrêt d’urgence"}, {"id": 112, "img": "images/112-surelevation-de-la-chaussee.png", "mg": "Fahasimban’ny lalana", "sub": "surélévation de la chaussée"}, {"id": 113, "img": "images/113-priorite-par-rapport-a-la-circulation-venant-en-sens-in.png", "mg": "Manana fahefana ianao raha mihoatra amin’ilayavy mifanena", "sub": "priorité par rapport à la circulation venant en sens inverse"}, {"id": 114, "img": "images/114-arret-autorise-sur-le-trottoir.png", "mg": "Toerana azo iatoana eo @ sisin-dalana", "sub": "Arrêt autorisé sur le trottoir"}, {"id": 115, "img": "images/115-passage-pour-pietons.png", "mg": "Toerana voatokana hoan’ny mpandeha an-tongotra", "sub": "passage pour piétons"}, {"id": 116, "img": "images/116-entree-dautoroute.png", "mg": "Fidirana @ « autoroute »", "sub": "entrée d’autoroute"}, {"id": 117, "img": "images/117-sortie-dautoroute.png", "mg": "Fivoahana @ « autoroute »", "sub": "sortie d’autoroute"}, {"id": 118, "img": "images/118-terrain-pour-caravane.png", "mg": "Toerana azo anaovana « caravane »", "sub": "terrain pour caravane"}, {"id": 119, "img": "images/119-auberge-de-jeunesse.png", "mg": "Akanin’ny tanora", "sub": "auberge de jeunesse"}, {"id": 120, "img": "images/120-lalana-mizara-file-telo-ka-ny-ampovoany-dia-tsy-azo-ale.png", "mg": "Lalana mizara « file » telo ka ny ampovoany dia tsy azo alehan’ny « camion » mihoatra ny 3.5t", "sub": ""}, {"id": 121, "img": "images/121-lalana-mizara-file-roa-ka-ny-file-ankavanana-tsy-azo-an.png", "mg": "Lalana mizara « file » roa ka ny « file » ankavanana tsy azo andehanana mihoatran’ny 70km/h, ny « file » ankavia tsy azo andehanana mihoatra ny 90km/h", "sub": ""}], "desc": "Carré ou rectangle bleu : il donne une information utile (parking, hôpital, sens unique…)."}, {"id": "c6", "mg": "Takelaby milaza ny fiafaran'ny tsy maintsy atao", "fr": "Fin d'obligation", "items": [{"id": 122, "img": "images/122-fiafaranny-lalana-voatokana-handehananny-bisikileta.png", "mg": "Fiafaran’ny lalana voatokana handehanan’ny bisikileta", "sub": ""}, {"id": 123, "img": "images/123-fiafaranny-lalana-voatokana-handehananny-mpandeha-an-to.png", "mg": "Fiafaran’ny lalana voatokana handehanan’ny mpandeha an-tongotra", "sub": ""}, {"id": 124, "img": "images/124-fiafaranny-vitesy-tsy-maintsy-rahina-30km-h-farafahakel.png", "mg": "Fiafaran’ny vitesy tsy maintsy rahina 30km/h farafahakeliny", "sub": ""}, {"id": 125, "img": "images/125-fiafaranny-lalana-voatokana-hoanny-fiara-fitateranolona.png", "mg": "Fiafaran’ny lalana voatokana hoan’ny fiara fitateran’olona", "sub": ""}, {"id": 126, "img": "images/126-fiafaranny-toerana-tsy-maintsy-andrehetana-jiro.png", "mg": "Fiafaran’ny toerana tsy maintsy andrehetana jiro", "sub": ""}], "desc": "Le panneau d'obligation barré d'une diagonale : l'obligation prend fin."}, {"id": "c7", "mg": "Takelaby milaza ny fiafaran'ny tsy azo atao", "fr": "Fin d'interdiction", "items": [{"id": 127, "img": "images/127-fin-de-toutes-les-prescriptions-locales.png", "mg": "Fiafaran’ny zavatra rehetra voarara teo aloha", "sub": "fin de toutes les prescriptions locales"}, {"id": 128, "img": "images/128-fin-dinterdiction-de-stationner.png", "mg": "Fiafaran’ny toerana tsy azo ijanonana", "sub": "fin d’interdiction de stationner"}, {"id": 129, "img": "images/129-fin-de-limitation-de-vitesse.png", "mg": "Fiafaran’ny hafainganam-pandeha voafetra 50km/h", "sub": "fin de limitation de vitesse"}, {"id": 130, "img": "images/130-fin-dinterdiction-de-depasser.png", "mg": "Fiafaran’ny toerana tsy azo isongonana", "sub": "fin d’interdiction de dépasser"}, {"id": 131, "img": "images/131-fin-dinterdiction-de-depasser-pour-les-vehicules-plus-d.png", "mg": "Fiafaran’ny toerana tsy azo isongonan’ny fiara lehibe", "sub": "fin d’interdiction de dépasser pour les véhicules plus de 5.5t"}, {"id": 132, "img": "images/132-fin-dinterdiction-de-lemploi-des-avertisseurs-sonores.png", "mg": "Fiafaran’ny toerana tsy azo ampanenoina anjomara", "sub": "fin d’interdiction de l’emploi des avertisseurs sonores"}, {"id": 133, "img": "images/133-debut-de-stationnement-a-duree-limitee.png", "mg": "Fiandohan’ny toerana azo ijanonana ao anatin’ny fotoana voafetra", "sub": "début de stationnement  à durée limitée"}, {"id": 134, "img": "images/134-fin-de-stationnement-a-duree-limite.png", "mg": "Fiafaran’ny toerana azo ijanonana ao anatin’ny fotoana voafetra, hita mandry @ tany", "sub": "fin de stationnement à durée limité"}], "desc": "Le panneau d'interdiction barré d'une diagonale : l'interdiction prend fin."}, {"id": "c8", "mg": "Balizy", "fr": "Balises", "items": [{"id": 135, "img": "images/135-balise-de-virage.png", "mg": "Balizy mametra fiolahana", "sub": "Balise de virage"}, {"id": 136, "img": "images/136-balise-dintersection.png", "mg": "Balizy milaza fihaonan-dalana  mitovy hery ka ny malalaka avy @ ankavanana no mandeha aloha", "sub": "Balise d’intersection"}, {"id": 137, "img": "images/137-balise-de-retrecissement.png", "mg": "Balizy milaza lalana mihatery", "sub": "Balise de retrecissement"}, {"id": 138, "img": "images/138-balise-de-priorite.png", "mg": "Balizy milaza fandeferana hita eny @ lalana kely hanapaka lalana lehibe", "sub": "Balise de priorité"}, {"id": 139, "img": "images/139-balisage-de-virages.png", "mg": "Balizy hita eny amin’ny fiolahana tena mampidi-doza sady mihatery", "sub": "Balisage de virages"}], "desc": "Bornes et balises placées au bord de la route pour signaler un virage, un carrefour ou un rétrécissement."}, {"id": "c9", "mg": "Takelaby milaza lalamby", "fr": "Passages à niveau", "items": [{"id": 140, "img": "images/140-croix-de-saint-andre-panneau-de-position.png", "mg": "Mitsatoka eny @ lalan-kely hanapaka lalamby tsy misy mpiambina na seranam-piaramanidina", "sub": "Croix de Saint André, panneau de position"}, {"id": 141, "img": "images/141-croix-de-saint-andre.png", "mg": "Mipetraka eny @ lalan-dehibe hanapaka lalamby tokana na seranam-piaramanidina, miaraka @ « signal automatique »", "sub": "Croix de Saint André"}, {"id": 142, "img": "images/142-croix-de-saint-andre.png", "mg": "Mitsatoka eny @ lalan-dehibe hanapaka lalamby maromaro, miaraka @ « signal automatique »", "sub": "Croix de Saint André"}], "desc": "Signalent un passage à niveau : croix de Saint-André et panneaux de position."}, {"id": "c10", "mg": "Jiro tely moratra", "fr": "Signaux lumineux", "items": [], "lights": {"imgs": ["images/143-feux-tricolores-1.png", "images/143-feux-tricolores-2.png"], "lines": ["Mena : mijanona ny fiara (faharetany 20s)", "Mavo : mampitandrina fa hirehitra ny mena (faharetany 5s)", "Maitso : mandeha ny fiara (faharetany 40s)", "Fomba firehatry ny jiro : maitso,mavo,mena,maitso,mavo,mena…", "Ny 4ème feu dia flèche maintso manondro mankany ankavanana miara-mirehitra amin’ny jiro mena. Mandefitra rehefa manoloana azy, mandeha mora ar manaja ny ankavia", "Ny jiro mavo mipipika dia mampitandrina, mandeha moramora ka izay malalaka @ ankavanana no mandeha aloha"]}, "desc": "Feux tricolores : rouge, orange (jaune) et vert."}];
+const $=(s,r=document)=>r.querySelector(s);
+const el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const norm=s=>s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+
+/* ---------- données ---------- */
+const chapters=DATA;
+const ITEMS=[];chapters.forEach(c=>c.items.forEach(i=>{i.ch=c.id;i.chName=c.fr;ITEMS.push(i)}));
+const byCh=id=>ITEMS.filter(i=>i.ch===id);
+const CATS=chapters.filter(c=>['c1','c2','c3','c4','c5','c6','c7'].includes(c.id));
+
+/* ---------- onglets ---------- */
+function showTab(n){
+  $('#lecon').classList.toggle('hide',n!=='lecon');$('#quiz').classList.toggle('hide',n!=='quiz');
+  $('#t-lecon').setAttribute('aria-selected',n==='lecon');$('#t-quiz').setAttribute('aria-selected',n==='quiz');
+  if(location.hash!=='#'+n)history.replaceState(null,'','#'+n);window.scrollTo(0,0);
+}
+$('#t-lecon').onclick=()=>showTab('lecon');$('#t-quiz').onclick=()=>showTab('quiz');$('#go-quiz').onclick=()=>showTab('quiz');
+
+/* ---------- leçon ---------- */
+const itemCard=i=>{
+  const c=el('div','card');
+  c.innerHTML=`<div class="tile"><img src="${i.img}" alt="${esc(i.sub||i.mg)}"></div><div class="txt"><div class="mg">${esc(i.mg)}</div>${i.sub?`<div class="fr">${esc(i.sub)}</div>`:''}</div>`;
+  c.onclick=()=>{if($('#chapters').classList.contains('review'))c.classList.toggle('open')};
+  return c;
+};
+function renderLesson(){
+  const root=$('#chapters');root.innerHTML='';
+  const chips=$('#chips');chips.innerHTML='';
+  chapters.forEach(c=>{
+    const sec=el('section','chap');sec.id=c.id;
+    sec.innerHTML=`<h2>${esc(c.fr)}<small>${esc(c.mg)}</small></h2><p class="d">${esc(c.desc)}</p>`;
+    const g=el('div','grid');
+    c.items.forEach(i=>g.appendChild(itemCard(i)));
+    if(c.lights){
+      const L=el('div','card lights');
+      L.innerHTML=`<div class="imgs">${c.lights.imgs.map(s=>`<div class="tile"><img src="${s}" alt="Feux tricolores"></div>`).join('')}</div><div class="txt"><ul>${c.lights.lines.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div>`;
+      g.appendChild(L);
+    }
+    sec.appendChild(g);root.appendChild(sec);
+    const a=el('a','chip',esc(c.fr)+' <small>('+(c.items.length||c.lights.imgs.length)+')</small>');a.href='#'+c.id;
+    a.onclick=e=>{e.preventDefault();document.getElementById(c.id).scrollIntoView()};chips.appendChild(a);
+  });
+}
+$('#q').addEventListener('input',e=>{
+  const q=norm(e.target.value.trim());let any=false;
+  document.querySelectorAll('#chapters .chap').forEach(sec=>{
+    let vis=0;sec.querySelectorAll('.card').forEach(c=>{const m=!q||norm(c.textContent).includes(q)||norm(c.querySelector('img')?.alt||'').includes(q);c.classList.toggle('hide',!m);if(m)vis++});
+    sec.classList.toggle('hide',vis===0);if(vis)any=true;
+  });
+  $('#none').classList.toggle('hide',any);
+});
+$('#rev').onchange=e=>$('#chapters').classList.toggle('review',e.target.checked);
+/* mode révision : masquer le texte */
+(function(){const st=document.createElement('style');document.head.appendChild(st)})();
+
+/* ---------- quiz : fabrique de questions ---------- */
+let POOL=ITEMS;           // filtré par chapitre
+const lab=i=>`${esc(i.mg)}${i.sub?`<span class="s">${esc(i.sub)}</span>`:''}`;
+const plain=i=>i.mg+(i.sub?' — '+i.sub:'');
+function distract(it,n){
+  let same=byCh(it.ch).filter(x=>x.id!==it.id&&x.mg!==it.mg);
+  let rest=ITEMS.filter(x=>x.id!==it.id&&x.mg!==it.mg&&x.ch!==it.ch);
+  let out=shuffle(same).slice(0,n);
+  if(out.length<n)out=out.concat(shuffle(rest).slice(0,n-out.length));
+  return out;
+}
+function mkQCM(it){return{type:'QCM',render(done){
+  const o=shuffle([it,...distract(it,3)]);
+  const box=el('div','q');
+  box.innerHTML=`<span class="qtype">QCM</span><h2>Que signifie ce panneau ?</h2><div class="qimg"><div class="tile"><img src="${it.img}" alt="Panneau"></div></div><div class="opts"></div><div class="fb" aria-live="polite"></div>`;
+  const opts=$('.opts',box),fb=$('.fb',box);
+  o.forEach(x=>{const b=el('button','opt',lab(x));b.onclick=()=>{
+    opts.querySelectorAll('button').forEach(k=>k.disabled=true);
+    const good=x===it;b.classList.add(good?'ok':'ko');
+    if(!good)opts.querySelectorAll('button')[o.indexOf(it)].classList.add('ok');
+    fb.className='fb '+(good?'ok':'ko');fb.textContent=good?'Bonne réponse !':'Raté. La bonne réponse est en vert.';
+    done(good?1:0,it)};opts.appendChild(b)});
+  return box}}}
+function mkRev(it){return{type:'Quel panneau ?',render(done){
+  const o=shuffle([it,...distract(it,3)]);
+  const box=el('div','q');
+  box.innerHTML=`<span class="qtype">Quel panneau ?</span><h2>Quel panneau correspond à cette définition ?</h2><div class="stmt"><b>${esc(it.mg)}</b>${it.sub?`<div class="s">${esc(it.sub)}</div>`:''}</div><div class="opts imgs"></div><div class="fb" aria-live="polite"></div>`;
+  const opts=$('.opts',box),fb=$('.fb',box);
+  o.forEach(x=>{const b=el('button','opt',`<div class="tile"><img src="${x.img}" alt="Panneau"></div>`);b.onclick=()=>{
+    opts.querySelectorAll('button').forEach(k=>k.disabled=true);
+    const good=x===it;b.classList.add(good?'ok':'ko');
+    if(!good)opts.querySelectorAll('button')[o.indexOf(it)].classList.add('ok');
+    fb.className='fb '+(good?'ok':'ko');fb.textContent=good?'Bonne réponse !':'Raté. Le bon panneau est entouré de vert.';
+    done(good?1:0,it)};opts.appendChild(b)});
+  return box}}}
+function mkTF(it){return{type:'Vrai ou faux',render(done){
+  const d=distract(it,1)[0];const truth=Math.random()<.5||!d;const shown=truth?it:d;
+  const box=el('div','q');
+  box.innerHTML=`<span class="qtype">Vrai ou faux</span><h2>Cette affirmation est-elle exacte ?</h2><div class="qimg"><div class="tile"><img src="${it.img}" alt="Panneau"></div></div><div class="stmt">Ce panneau signifie : <b>${esc(shown.mg)}</b>${shown.sub?`<div class="s">${esc(shown.sub)}</div>`:''}</div><div class="opts tf"><button class="opt" data-v="1">Vrai</button><button class="opt" data-v="0">Faux</button></div><div class="fb" aria-live="polite"></div>`;
+  const fb=$('.fb',box),bs=box.querySelectorAll('.opt');
+  bs.forEach(b=>b.onclick=()=>{
+    bs.forEach(k=>k.disabled=true);
+    const ans=b.dataset.v==='1';const good=ans===truth;
+    b.classList.add(good?'ok':'ko');if(!good)[...bs].find(k=>k!==b).classList.add('ok');
+    fb.className='fb '+(good?'ok':'ko');
+    fb.innerHTML=(good?'Bonne réponse !':'Raté.')+(truth?'':`<small>Le vrai sens : ${esc(plain(it))}</small>`);
+    done(good?1:0,it)});
+  return box}}}
+function mkCat(it){return{type:'Famille',render(done){
+  const right=CATS.find(c=>c.id===it.ch);
+  const o=shuffle([right,...shuffle(CATS.filter(c=>c!==right)).slice(0,3)]);
+  const box=el('div','q');
+  box.innerHTML=`<span class="qtype">Famille de panneaux</span><h2>À quelle famille appartient ce panneau ?</h2><div class="qimg"><div class="tile"><img src="${it.img}" alt="Panneau"></div></div><div class="opts"></div><div class="fb" aria-live="polite"></div>`;
+  const opts=$('.opts',box),fb=$('.fb',box);
+  o.forEach(c=>{const b=el('button','opt',esc(c.fr)+`<span class="s">${esc(c.mg)}</span>`);b.onclick=()=>{
+    opts.querySelectorAll('button').forEach(k=>k.disabled=true);const good=c===right;b.classList.add(good?'ok':'ko');
+    if(!good)opts.querySelectorAll('button')[o.indexOf(right)].classList.add('ok');
+    fb.className='fb '+(good?'ok':'ko');fb.innerHTML=(good?'Bonne réponse !':'Raté.')+`<small>${esc(right.desc)}</small>`;
+    done(good?1:0,it)};opts.appendChild(b)});
+  return box}}}
+function mkMatch(items){return{type:'Relier',render(done){
+  const n=items.length;const rightOrder=shuffle(items.map((_,i)=>i));
+  const box=el('div','q');
+  box.innerHTML=`<span class="qtype">Relier par flèches</span><h2>Reliez chaque panneau à sa définition</h2><p class="hint">Touchez un panneau, puis sa définition (ou l’inverse). Touchez à nouveau pour défaire un lien.</p><div class="match"><div class="colL"></div><div></div><div class="colR"></div><svg></svg></div><div class="nav"><span class="fb" aria-live="polite"></span><button class="cta" disabled>Vérifier</button></div>`;
+  const m=$('.match',box),L=$('.colL',m),R=$('.colR',m),svg=$('svg',m),btn=$('.cta',box),fb=$('.fb',box);
+  const lb=[],rb=[];const link=new Array(n).fill(-1);let sel=null,checked=false;
+  items.forEach((it,i)=>{const b=el('button','mi L',`<div class="tile"><img src="${it.img}" alt="Panneau ${i+1}"></div>`);b.onclick=()=>click('L',i);L.appendChild(b);lb.push(b)});
+  rightOrder.forEach((idx,pos)=>{const it=items[idx];const b=el('button','mi R',`<span>${esc(it.mg)}</span>${it.sub?`<span class="s">${esc(it.sub)}</span>`:''}`);b.onclick=()=>click('R',idx);R.appendChild(b);rb[idx]=b});
+  function unlinkSide(side,i){if(side==='L'){link[i]=-1}else{for(let k=0;k<n;k++)if(link[k]===i)link[k]=-1}}
+  function click(side,i){
+    if(checked)return;
+    if(sel&&sel.side!==side){const l=side==='L'?i:sel.i,r=side==='R'?i:sel.i;unlinkSide('L',l);unlinkSide('R',r);link[l]=r;sel=null}
+    else if(sel&&sel.side===side&&sel.i===i){sel=null}
+    else{unlinkSide(side,i);sel={side,i}}
+    paint()}
+  function paint(){
+    lb.forEach((b,i)=>{b.classList.toggle('sel',!!sel&&sel.side==='L'&&sel.i===i);b.classList.toggle('linked',link[i]>=0)});
+    rb.forEach((b,i)=>{b.classList.toggle('sel',!!sel&&sel.side==='R'&&sel.i===i);b.classList.toggle('linked',link.includes(i))});
+    btn.disabled=link.some(x=>x<0)||checked;draw()}
+  function center(b,side){const a=b.getBoundingClientRect(),p=m.getBoundingClientRect();return{x:(side==='L'?a.right:a.left)-p.left,y:a.top+a.height/2-p.top}}
+  function line(i,j,cls,dash){const a=center(lb[i],'L'),b=center(rb[j],'R');
+    const p=document.createElementNS('http://www.w3.org/2000/svg','path');
+    p.setAttribute('d',`M${a.x},${a.y} C${a.x+40},${a.y} ${b.x-40},${b.y} ${b.x},${b.y}`);
+    p.setAttribute('fill','none');p.setAttribute('stroke-width','3');p.setAttribute('stroke-linecap','round');p.setAttribute('stroke',cls);if(dash)p.setAttribute('stroke-dasharray','6 5');
+    svg.appendChild(p);
+    const arrow=document.createElementNS('http://www.w3.org/2000/svg','path');
+    arrow.setAttribute('d',`M${b.x-9},${b.y-6} L${b.x},${b.y} L${b.x-9},${b.y+6}`);arrow.setAttribute('fill','none');arrow.setAttribute('stroke',cls);arrow.setAttribute('stroke-width','3');arrow.setAttribute('stroke-linecap','round');arrow.setAttribute('stroke-linejoin','round');svg.appendChild(arrow)}
+  function draw(){svg.innerHTML='';const css=getComputedStyle(document.documentElement);
+    const blue=css.getPropertyValue('--blue').trim(),ok=css.getPropertyValue('--ok').trim(),ko=css.getPropertyValue('--red').trim();
+    link.forEach((j,i)=>{if(j<0)return;
+      if(!checked)line(i,j,blue);
+      else if(j===i)line(i,j,ok);
+      else{line(i,j,ko);}});
+    if(checked)link.forEach((j,i)=>{if(j!==i)line(i,i,ok,true)})}
+  btn.onclick=()=>{checked=true;let good=0;
+    link.forEach((j,i)=>{const okk=j===i;if(okk)good++;lb[i].classList.add(okk?'ok':'ko');rb[j].classList.add(okk?'ok':'ko');lb[i].disabled=true});
+    rb.forEach(b=>b.disabled=true);paint();
+    fb.className='fb '+(good===n?'ok':'ko');fb.innerHTML=`${good} / ${n} liens corrects${good<n?'<small>Traits pointillés verts : les bonnes associations.</small>':''}`;
+    btn.disabled=true;done(good/n,items);};
+  box._after=draw;window.addEventListener('resize',draw);
+  setTimeout(draw,60);
+  return box}}}
+
+/* ---------- quiz : définitions ---------- */
+const QUIZZES=[
+ {id:'qcm',title:'QCM : que signifie ce panneau ?',desc:'Une image, quatre propositions : choisissez la bonne définition.',n:10,build:p=>shuffle(p).slice(0,10).map(mkQCM)},
+ {id:'rev',title:'Quel panneau ? (définition → image)',desc:'On vous donne la définition, retrouvez le bon panneau parmi quatre.',n:10,build:p=>shuffle(p).slice(0,10).map(mkRev)},
+ {id:'tf',title:'Vrai ou faux',desc:'Une image et une affirmation : est-elle exacte ?',n:10,build:p=>shuffle(p).slice(0,10).map(mkTF)},
+ {id:'cat',title:'Famille du panneau',desc:'Danger, intersection, interdiction, obligation… reconnaissez la famille grâce à la forme et à la couleur.',n:10,global:true,build:p=>shuffle(ITEMS.filter(i=>CATS.some(c=>c.id===i.ch))).slice(0,10).map(mkCat)},
+ {id:'match',title:'Relier par flèches',desc:'Trois séries de 5 panneaux à relier à leur définition.',n:3,build:p=>{const a=shuffle(p);const k=Math.min(5,a.length);const out=[];for(let r=0;r<3&&a.length>=k;r++){out.push(mkMatch(a.splice(0,k)))}return out}},
+ {id:'exam',title:'Examen final (20 questions)',desc:'Un mélange de tous les types d’exercices, avec correction à la fin.',n:20,build:p=>{const a=shuffle(p);const pick=n=>a.splice(0,n);
+   const qs=[...pick(6).map(mkQCM),...pick(4).map(mkRev),...pick(5).map(mkTF),...shuffle(ITEMS.filter(i=>CATS.some(c=>c.id===i.ch))).slice(0,4).map(mkCat)];
+   const rest=a.slice(0,5);if(rest.length>=3)qs.push(mkMatch(rest));return shuffle(qs)}}
+];
+
+/* ---------- quiz : hub ---------- */
+function renderHub(){
+  const sel=$('#chsel');
+  if(!sel.options.length){sel.innerHTML='<option value="all">Tous les chapitres</option>'+chapters.filter(c=>c.items.length>=4).map(c=>`<option value="${c.id}">${esc(c.fr)}</option>`).join('')}
+  const cards=$('#cards');cards.innerHTML='';
+  QUIZZES.forEach(q=>{
+    const best=store.get('best-'+q.id);
+    const c=el('div','qcard',`<h3>${esc(q.title)}</h3><p>${esc(q.desc)}</p>${best?`<div class="best">Meilleur score : ${esc(best)}</div>`:''}`);
+    const b=el('button','cta','Commencer');b.onclick=()=>start(q);c.appendChild(b);cards.appendChild(c)});
+}
+$('#chsel').onchange=()=>{};
+
+/* ---------- quiz : exécution ---------- */
+function start(q){
+  const ch=$('#chsel').value;POOL=ch==='all'?ITEMS:byCh(ch);
+  if(POOL.length<4)POOL=ITEMS;
+  const qs=q.build(POOL);
+  $('#hub').classList.add('hide');const run=$('#run');run.classList.remove('hide');run.innerHTML='';
+  let idx=0,score=0,total=0;const log=[];
+  qs.forEach(()=>total++);
+  const head=el('div','',`<div class="meta"><span id="m1"></span><span id="m2"></span></div><div class="bar"><i></i></div>`);
+  const holder=el('div');run.append(head,holder);
+  const nav=el('div','nav');const quit=el('button','cta alt','Quitter');quit.onclick=()=>{run.classList.add('hide');$('#hub').classList.remove('hide');renderHub()};
+  const next=el('button','cta','Suivant →');next.disabled=true;nav.append(quit,next);run.appendChild(nav);
+  function show(){
+    holder.innerHTML='';next.disabled=true;next.textContent=idx===qs.length-1?'Voir le résultat':'Suivant →';
+    $('#m1',run).textContent=`${q.title.split(':')[0].split('(')[0].trim()} — question ${idx+1} / ${qs.length}`;$('#m2',run).textContent=`Score : ${Math.round(score*10)/10}`;
+    $('.bar i',run).style.width=(idx/qs.length*100)+'%';
+    const qq=qs[idx];const node=qq.render((s,info)=>{score+=s;log.push({s,info});next.disabled=false;$('#m2',run).textContent=`Score : ${Math.round(score*10)/10}`});
+    holder.appendChild(node);if(node._after)node._after();
+  }
+  next.onclick=()=>{idx++;if(idx<qs.length)show();else finish()};
+  function finish(){
+    run.innerHTML='';
+    const pct=Math.round(score/total*100);
+    const msg=pct>=90?'Excellent ! Vous maîtrisez très bien ces panneaux.':pct>=70?'Bien joué ! Encore un petit effort sur les erreurs.':pct>=50?'Passable. Relisez la leçon puis réessayez.':'Il faut réviser : reprenez la leçon avec le mode révision.';
+    const r=el('div','result',`<div class="score">${Math.round(score*10)/10} / ${total}</div><p><b>${pct} %</b> — ${msg}</p><div class="btns"></div>`);
+    const again=el('button','cta','Recommencer');again.onclick=()=>start(q);
+    const lesson=el('button','cta alt','Revoir la leçon');lesson.onclick=()=>{run.classList.add('hide');$('#hub').classList.remove('hide');renderHub();showTab('lecon')};
+    const hub=el('button','cta alt','Autres quiz');hub.onclick=()=>{run.classList.add('hide');$('#hub').classList.remove('hide');renderHub()};
+    $('.btns',r).append(again,lesson,hub);
+    const bad=log.filter(l=>l.s<1&&l.info);
+    if(bad.length){const rl=el('div','review-list','<h3>À revoir</h3>');
+      bad.forEach(l=>{(Array.isArray(l.info)?l.info:[l.info]).forEach(i=>rl.appendChild(itemCard(i)))});r.appendChild(rl)}
+    run.appendChild(r);
+    const prev=parseFloat(store.get('bestnum-'+q.id)||'-1');if(pct>prev){store.set('bestnum-'+q.id,pct);store.set('best-'+q.id,`${Math.round(score*10)/10} / ${total} (${pct} %)`)}
+    window.scrollTo(0,0);
+  }
+  show();window.scrollTo(0,0);
+}
+
+/* ---------- init ---------- */
+renderLesson();renderHub();
+if(location.hash==='#quiz')showTab('quiz');
+</script>
+</body>
+</html>
