@@ -127,11 +127,16 @@ footer{color:var(--mute);font-size:.85rem;text-align:center;padding:20px 16px}
   .card{border-color:#999}.grid{grid-template-columns:1fr 1fr}
   .review .card .txt{filter:none}
 }
+header.top .wrap{display:grid;grid-template-columns:auto 1fr;column-gap:14px;align-items:center}
+header.top .sub,header.top .tabs{grid-column:1/-1}
+#lg{height:60px;width:auto;max-width:90px;object-fit:contain;display:block;margin-bottom:4px}
+@media (max-width:480px){#lg{height:44px;max-width:64px}}
 </style>
 </head>
 <body>
 <header class="top">
   <div class="wrap">
+  <img id="lg" src="logo.png" alt="Logo" onerror="this.style.display='none'">
     <h1>Panneaux de signalisation routière</h1>
     <p class="sub">Takelaby fanasokajana — leçon illustrée puis quiz d’entraînement</p>
     <div class="tabs" role="tablist">
